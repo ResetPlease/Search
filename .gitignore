@@ -1,7 +1,6 @@
 corpus/
 tokens.txt
 index.bin
-*.pdf
 
 core/tokenizer
 core/indexer
