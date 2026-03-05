@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ query }} - CryptoSearch</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0d1117; color: #c9d1d9; font-family: 'Segoe UI', sans-serif; padding: 20px 40px; }
+        .top { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+        .top h1 { font-size: 1.4em; color: #58a6ff; white-space: nowrap; }
+        .top form { display: flex; gap: 8px; flex: 1; }
+        .top input[type="text"] { flex: 1; padding: 8px 12px; border: 1px solid #30363d; border-radius: 6px; background: #161b22; color: #c9d1d9; font-size: 0.95em; outline: none; }
+        .top button { padding: 8px 18px; background: #238636; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+        .stats { color: #8b949e; margin-bottom: 16px; font-size: 0.9em; }
+        .result { margin-bottom: 18px; }
+        .result a { color: #58a6ff; text-decoration: none; font-size: 1.05em; }
+        .result a:hover { text-decoration: underline; }
+        .result .url { color: #3fb950; font-size: 0.85em; margin-top: 2px; }
+        .pagination { margin-top: 24px; }
+        .pagination a { color: #58a6ff; margin-right: 16px; text-decoration: none; }
+        .pagination a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="top">
+        <h1>CryptoSearch</h1>
+        <form action="/search" method="get">
+            <input type="text" name="q" value="{{ query }}">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div class="stats">Found {{ total }} results in {{ "%.2f"|format(time_ms) }} ms</div>
+    {% for r in results %}
+    <div class="result">
+        <a href="{{ r.url }}" target="_blank">{{ r.title }}</a>
+        <div class="url">{{ r.url }}</div>
+    </div>
+    {% endfor %}
+    <div class="pagination">
+        {% if page > 1 %}
+        <a href="/search?q={{ query }}&page={{ page - 1 }}">&larr; Previous 50</a>
+        {% endif %}
+        {% if has_next %}
+        <a href="/search?q={{ query }}&page={{ page + 1 }}">Next 50 &rarr;</a>
+        {% endif %}
+    </div>
+</body>
+</html>

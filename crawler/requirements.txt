@@ -1,0 +1,5 @@
+aiohttp
+pymongo
+pyyaml
+beautifulsoup4
+lxml

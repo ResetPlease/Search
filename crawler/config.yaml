@@ -1,0 +1,23 @@
+db:
+  host: localhost
+  port: 27017
+  name: crypto_news
+
+logic:
+  delay: 0.2
+  max_pages: 45000
+  concurrency: 80
+
+sources:
+  - name: cointelegraph
+    sitemap: https://cointelegraph.com/sitemap.xml
+    domain: cointelegraph.com
+    target: 15000
+  - name: cryptoslate
+    sitemap: https://cryptoslate.com/sitemap.xml
+    domain: cryptoslate.com
+    target: 12000
+  - name: bitcoinmagazine
+    sitemap: https://bitcoinmagazine.com/sitemap.xml
+    domain: bitcoinmagazine.com
+    target: 8000
